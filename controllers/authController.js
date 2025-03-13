@@ -69,6 +69,11 @@ exports.login = asyncHandler(async (req, res, next) => {
     return next(new ApiError('Invalid credentials', 401));
   }
 
+  //check if email is lower case
+  if (email !== email.toLowerCase()) {
+    return next(new ApiError('Email must be in lowercase', 400));
+  }
+
   // Generate token
   const token = user.getSignedJwtToken();
 
@@ -100,4 +105,19 @@ exports.getMe = asyncHandler(async (req, res, next) => {
     { user }, 
     'User information retrieved successfully'
   );
+});
+
+//logout user
+/**
+ * @desc    Logout user
+ * @route   GET /api/v1/auth/logout
+ * @access  Private
+ */
+exports.logout = asyncHandler(async (req, res, next) => {
+  res.cookie('token', 'none', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true
+  });
+
+  return ApiResponse.success(res, {}, 'User logged out successfully');
 });

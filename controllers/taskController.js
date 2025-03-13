@@ -11,6 +11,12 @@ const asyncHandler = require('../utils/asyncHandler');
 exports.createTask = asyncHandler(async (req, res, next) => {
   // Add user id to request body
   req.body.user = req.user.id;
+
+  //validate inputs
+  if (!req.body.title || !req.body.dueDate || !req.body.priority) {
+    return next(new ApiError('Title, due date and priority are required', 400));
+  }
+
   
   const task = await Task.create(req.body);
   
@@ -133,6 +139,15 @@ exports.deleteTask = asyncHandler(async (req, res, next) => {
   // Check if task belongs to user
   if (task.user.toString() !== req.user.id) {
     return next(new ApiError('Not authorized to delete this task', 403));
+  }
+
+  //
+
+  //check if task title already exists for user
+  const taskExists = await Task.findOne
+  ({ title: req.body.title, user: req.user.id, _id: { $ne: req.params.id } });
+  if (taskExists) {
+    return next(new ApiError('Task with this title already exists', 400));
   }
   
   await task.remove();

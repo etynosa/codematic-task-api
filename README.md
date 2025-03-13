@@ -77,12 +77,15 @@ The API documentation is available at `/api-docs` when the server is running. It
 
 Postman Documentation Url : https://documenter.getpostman.com/view/20930286/2sAYkAP2Xi
 
+Live APIURL: https://taskmgtapi.fly.dev/
+
 ## API Endpoints
 
 ### Authentication
 - `POST /api/v1/auth/register` - Register a new user
 - `POST /api/v1/auth/login` - Login and get JWT token
 - `GET /api/v1/auth/me` - Get current user info
+- `GET /api/v1/auth/logout` - Logout User
 
 ### Tasks
 - `GET /api/v1/tasks` - Get all tasks (with filtering and pagination)

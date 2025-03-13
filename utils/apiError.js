@@ -3,9 +3,9 @@ class ApiError extends Error {
       super(message);
       this.statusCode = statusCode;
       this.errors = errors;
-      this.isOperational = true;
+      // this.isOperational = true;
       
-      Error.captureStackTrace(this, this.constructor);
+      // Error.captureStackTrace(this, this.constructor);
     }
   }
   
