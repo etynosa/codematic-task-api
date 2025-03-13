@@ -75,6 +75,8 @@ npm start
 
 The API documentation is available at `/api-docs` when the server is running. It provides detailed information about all endpoints, request/response schemas, and authentication requirements.
 
+Postman Documentation Url : https://documenter.getpostman.com/view/20930286/2sAYkAP2Xi
+
 ## API Endpoints
 
 ### Authentication
